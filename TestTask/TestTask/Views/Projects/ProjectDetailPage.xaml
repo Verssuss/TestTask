@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TestTask.ViewModels.Projects"
+             x:Class="TestTask.Views.Projects.ProjectDetailPage">
+    <ContentPage.BindingContext>
+        <vm:ProjectDetailViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="REMOVE" Command="{Binding RemoveProject}" />
+        <ToolbarItem Text="EDIT" Command="{Binding EditProject}" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+            <Label Text="Name" FontSize="Medium" />
+            <Label Text="{Binding Name}" FontSize="Small" />
+            
+            <Label Text="Company Customer" FontSize="Medium"/>
+            <Label Text="{Binding CompanyCustomer}" FontSize="Small"/>
+            
+            <Label Text="Company Executor" FontSize="Medium" />
+            <Label Text="{Binding CompanyExecutor}" FontSize="Small"/>
+            
+            <Label Text="Employee" FontSize="Medium" />
+            <Label Text="{Binding Employee}" FontSize="Small"/>
+            
+            <Label Text="Leader" FontSize="Medium"/>
+            <Label Text="{Binding Leader}" FontSize="Small"/>
+            
+            <Label Text="Start" FontSize="Medium"/>
+            <Label Text="{Binding Start}" FontSize="Small"/>
+            
+            <Label Text="Finish" FontSize="Medium"/>
+            <Label Text="{Binding Finish}" FontSize="Small"/>
+            
+            <Label Text="Prioority" FontSize="Medium"/>
+            <Label Text="{Binding Priority}" FontSize="Small"/>
+
+                <Label Text="Executors" FontSize="Medium"/>
+                <CollectionView ItemsSource="{Binding Executors}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" FontSize="Small" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TestTask.ViewModels.Projects"
+             xmlns:control="clr-namespace:TestTask.Controls"
+             xmlns:enums="clr-namespace:TestTask.Model;assembly=TestTask.Model"
+             x:Class="TestTask.Views.Projects.EditProjectPage">
+    <ContentPage.BindingContext>
+        <vm:EditProjectViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="3" Padding="15" >
+                <Label Text="Name" FontSize="Medium" />
+                <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+
+                <Label Text="Company Customer" FontSize="Medium" />
+                <Editor Text="{Binding CompanyCustomer, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+
+                <Label Text="Company Executor" FontSize="Medium" />
+                <Editor Text="{Binding CompanyExecutor, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+
+                <Label Text="Employee" FontSize="Medium" />
+                <Picker ItemsSource="{Binding Employees}" SelectedItem="{Binding Employee}" FontSize="Medium" Margin="0" />
+
+                <Label Text="Leader" FontSize="Medium" />
+                <Picker ItemsSource="{Binding Employees}" SelectedItem="{Binding Leader}" FontSize="Medium" Margin="0" />
+
+                <Label Text="Start" FontSize="Medium" />
+                <DatePicker Date="{Binding Start}"/>
+
+                <Label Text="Finish" FontSize="Medium" />
+                <DatePicker Date="{Binding Finish}"/>
+                
+                <Label Text="Priority" FontSize="Medium" />
+                <control:EnumBindablePicker x:TypeArguments="enums:Priority" SelectedItem="{Binding Priority}"/>
+
+                <Label Text="Executors" FontSize="Medium" />
+                <Picker ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" FontSize="Medium" Margin="0" />
+
+                <CollectionView ItemsSource="{Binding Executors}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" FontSize="Medium" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    NumberOfTapsRequired="1"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EditProjectViewModel}}, Path=RemoveEmployee}"		
+                                    CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
