@@ -1,12 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TestTask.ViewModels.Employees"
+             xmlns:control="clr-namespace:TestTask.Controls"
              x:Class="TestTask.Views.Employees.EditEmployeePage">
+    <ContentPage.BindingContext>
+        <vm:EditEmployeeViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Spacing="3" Padding="15" >
+                <Label Text="Name" FontSize="Medium" />
+                <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+
+                <Label Text="Surname" FontSize="Medium" />
+                <Editor Text="{Binding Surname, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+
+                <Label Text="Patronymic" FontSize="Medium" />
+                <Editor Text="{Binding Patronymic, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+
+                <Label Text="Email" FontSize="Medium" />
+                <control:ValidateEntry Text="{Binding Email, Mode=TwoWay}" IsValidate="{Binding IsValidate}" FontSize="Medium" Margin="0" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

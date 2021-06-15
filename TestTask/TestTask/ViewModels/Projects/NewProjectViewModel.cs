@@ -173,9 +173,9 @@ namespace TestTask.ViewModels.Projects
         {
             var newItem = new Project
             {
-                Name = Name,
-                CompanyCustomer = CompanyCustomer,
-                CompanyExecutor = CompanyExecutor,
+                Name = Name.Trim(),
+                CompanyCustomer = CompanyCustomer.Trim(),
+                CompanyExecutor = CompanyExecutor.Trim(),
                 Employee = Employee,
                 Leader = Leader,
                 Start = Start,

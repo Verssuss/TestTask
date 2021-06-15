@@ -185,9 +185,9 @@ namespace TestTask.ViewModels.Projects
         {
             var editItem = await ProjectStore.GetItemAsync(ItemId);
 
-            editItem.Name = Name;
-            editItem.CompanyCustomer = CompanyCustomer;
-            editItem.CompanyExecutor = CompanyExecutor;
+            editItem.Name = Name.Trim();
+            editItem.CompanyCustomer = CompanyCustomer.Trim();
+            editItem.CompanyExecutor = CompanyExecutor.Trim();
             editItem.Employee = Employee;
             editItem.Leader = Leader;
             editItem.Start = Start;

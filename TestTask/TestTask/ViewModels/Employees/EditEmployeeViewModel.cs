@@ -39,6 +39,8 @@ namespace TestTask.ViewModels.Employees
         private Project _selectedProjectLeader;
         private Project _selectedProjectEmployee;
         private Project _selectedProjectExecutor;
+        private bool _isValidate;
+
         public List<Project> Projects { get; private set; }
         #endregion
 
@@ -77,7 +79,10 @@ namespace TestTask.ViewModels.Employees
         {
             get => _employeeProjects; set => SetProperty(ref _employeeProjects, value);
         }
-
+        public bool IsValidate
+        {
+            get => _isValidate; set => SetProperty(ref _isValidate, value);
+        }
         public ICollection<Project> ExecutorProjects
         {
             get => _executorProjects; set => SetProperty(ref _executorProjects, value);
@@ -173,16 +178,16 @@ namespace TestTask.ViewModels.Employees
                 Patronymic,
                 Email
             }
-            .All(x => !string.IsNullOrEmpty(x));
+            .All(x => !string.IsNullOrEmpty(x)) && IsValidate;
         }
 
         async void OnSave()
         {
             var editItem = await EmployeeStore.GetItemAsync(ItemId);
 
-            editItem.Name = Name;
-            editItem.Surname = Surname;
-            editItem.Patronymic = Patronymic;
+            editItem.Name = Name.Trim();
+            editItem.Surname = Surname.Trim();
+            editItem.Patronymic = Patronymic.Trim();
             editItem.Email = Email;
             editItem.LeaderProjects = LeaderProjects;
             editItem.EmployeeProjects = EmployeeProjects;

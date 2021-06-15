@@ -197,9 +197,9 @@ namespace TestTask.ViewModels.Employees
         {
             var newItem = new Employee
             {
-                Name = Name,
-                Surname = Surname,
-                Patronymic = Patronymic,
+                Name = Name.Trim(),
+                Surname = Surname.Trim(),
+                Patronymic = Patronymic.Trim(),
                 Email = Email,
                 EmployeeProjects = EmployeeProjects,
                 ExecutorProjects = ExecutorProjects,
