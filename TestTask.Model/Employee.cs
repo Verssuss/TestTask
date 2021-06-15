@@ -14,11 +14,8 @@ namespace TestTask.Model
         public string Surname { get; set; } //Фамилия
         public string Patronymic { get; set; } //Отчество
         public string Email { get; set; }
-        [NotMapped]
         public ICollection<Project> LeaderProjects { get; set; } //1 сотрудник может быть руководителем нескольких проектов
-        [NotMapped]
         public ICollection<Project> EmployeeProjects { get; set; } //1 сотрудник может быть работником нескольких проектов
-        [NotMapped]
         public ICollection<Project> ExecutorProjects { get; set; } //1 сотрудник может быть исполнителем нескольких проектов
         //public List<EmployeeProject> EmpPrj { get; set; }
         public override string ToString()

@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:TestTask.ViewModels.Projects" xmlns:model="clr-namespace:TestTask.Model;assembly=TestTask.Model"
-             x:Class="TestTask.Views.Projects.ProjectPage">
+             xmlns:vm="clr-namespace:TestTask.ViewModels.Projects"
+             xmlns:control="clr-namespace:TestTask.Controls"
+             xmlns:model="clr-namespace:TestTask.Model;assembly=TestTask.Model"
+             xmlns:enums="clr-namespace:TestTask.Model;assembly=TestTask.Model"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="TestTask.Views.Projects.ProjectPage" Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:ProjectViewModel />
     </ContentPage.BindingContext>
@@ -11,42 +15,56 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar x:Name="SearchBar"  SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}" Text="{Binding SearchText}" />
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <SearchBar x:Name="SearchBar"  SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}" Text="{Binding SearchText}" />
+                    <Picker ItemsSource="{Binding PriorityItems}" SelectedItem="{Binding SelectPriority}" WidthRequest="75"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Label Text="FROM" WidthRequest="40" VerticalOptions="Center" />
+                    <DatePicker  Date="{Binding SelectDateStart}" MinimumDate="{Binding MinDateFrom}" />
+                    <Label Text="TO" WidthRequest="20" VerticalOptions="Center"/>
+                    <DatePicker Date="{Binding SelectDateFinish}" MinimumDate="{Binding MinDateTo}"/>
+                </StackLayout>
+            </StackLayout>
             <RefreshView x:DataType="vm:ProjectViewModel" Command="{Binding LoadProjects}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                 <CollectionView x:Name="ProjectListView"
                 ItemsSource="{Binding Projects}"
                 SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout Padding="10" x:DataType="model:Project">
-                                <Label Text="{Binding Name}" 
+                            <Frame BorderColor="Orange" BackgroundColor="LightGray" HasShadow="True" CornerRadius="10">
+                                <StackLayout Padding="5" x:DataType="model:Project">
+                                    <Label Text="{Binding Name}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
-                                <Label Text="{Binding CompanyCustomer}" 
+                                    <Label Text="{Binding CompanyCustomer}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
-                                <Label Text="{Binding CompanyExecutor}" 
+                                    <Label Text="{Binding CompanyExecutor}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13"  />
-                                <Label Text="{Binding Start}" 
+                                    <Label Text="{Binding Start}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13"  />
-                                <Label Text="{Binding Finish}" 
+                                    <Label Text="{Binding Finish}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13"  />
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer 
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProjectViewModel}}, Path=ShowProject}"		
                                 CommandParameter="{Binding .}">
-                                    </TapGestureRecognizer>
-                                </StackLayout.GestureRecognizers>
-                            </StackLayout>
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Frame>
+
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

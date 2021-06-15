@@ -125,11 +125,11 @@ namespace TestTask.Model.Migrations
                             CompanyCustomer = "Customer",
                             CompanyExecutor = "Executor",
                             EmployeeId = 1,
-                            Finish = new DateTime(2021, 6, 24, 19, 10, 4, 365, DateTimeKind.Local).AddTicks(196),
+                            Finish = new DateTime(2021, 6, 24, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(6920),
                             LeaderId = 1,
                             Name = "SuperProject",
                             Priority = (byte)3,
-                            Start = new DateTime(2021, 6, 14, 19, 10, 4, 364, DateTimeKind.Local).AddTicks(2865)
+                            Start = new DateTime(2021, 6, 14, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(126)
                         },
                         new
                         {
@@ -137,11 +137,11 @@ namespace TestTask.Model.Migrations
                             CompanyCustomer = "Customer2",
                             CompanyExecutor = "Executor2",
                             EmployeeId = 2,
-                            Finish = new DateTime(2021, 6, 27, 19, 10, 4, 365, DateTimeKind.Local).AddTicks(715),
+                            Finish = new DateTime(2021, 6, 27, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(7426),
                             LeaderId = 2,
                             Name = "SuperProject2",
                             Priority = (byte)1,
-                            Start = new DateTime(2021, 6, 14, 19, 10, 4, 365, DateTimeKind.Local).AddTicks(711)
+                            Start = new DateTime(2021, 6, 14, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(7423)
                         },
                         new
                         {
@@ -149,11 +149,11 @@ namespace TestTask.Model.Migrations
                             CompanyCustomer = "Customer3",
                             CompanyExecutor = "Executor3",
                             EmployeeId = 3,
-                            Finish = new DateTime(2021, 6, 30, 19, 10, 4, 365, DateTimeKind.Local).AddTicks(721),
+                            Finish = new DateTime(2021, 6, 30, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(7432),
                             LeaderId = 3,
                             Name = "SuperProject3",
                             Priority = (byte)2,
-                            Start = new DateTime(2021, 6, 14, 19, 10, 4, 365, DateTimeKind.Local).AddTicks(720)
+                            Start = new DateTime(2021, 6, 14, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(7431)
                         });
                 });
 

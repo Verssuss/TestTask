@@ -31,7 +31,7 @@
                 <DatePicker Date="{Binding Start}"/>
 
                 <Label Text="Finish" FontSize="Medium" />
-                <DatePicker Date="{Binding Finish}"/>
+                <DatePicker Date="{Binding Finish}" MinimumDate="{Binding MinDateTo}"/>
                 
                 <Label Text="Priority" FontSize="Medium" />
                 <control:EnumBindablePicker x:TypeArguments="enums:Priority" SelectedItem="{Binding Priority}"/>
@@ -39,7 +39,7 @@
                 <Label Text="Executors" FontSize="Medium" />
                 <Picker ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" FontSize="Medium" Margin="0" />
 
-                <CollectionView ItemsSource="{Binding Executors}">
+                <CollectionView ItemsSource="{Binding Executors}" HeightRequest="200">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Label Text="{Binding .}" FontSize="Medium" >

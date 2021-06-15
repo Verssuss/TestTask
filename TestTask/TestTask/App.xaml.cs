@@ -19,7 +19,7 @@ namespace TestTask
 {
     public partial class App : Application
     {
-        static string pathDB = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "test.db");
+        static string pathDB = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "peDataBase.db");
         public App()
         {
             InitializeComponent();
@@ -63,18 +63,6 @@ namespace TestTask
         }
         protected async override void OnStart()
         {
-            //if (!DbContext.GetService<IRelationalDatabaseCreator>().Exists())
-    //        {
-    //            await DbContext.Database.ExecuteSqlRawAsync(@"
-    //    CREATE TABLE IF NOT EXISTS '__EFMigrationsHistory' (
-    //        'MigrationId' TEXT NOT NULL CONSTRAINT 'PK___EFMigrationsHistory' PRIMARY KEY,
-    //        'ProductVersion' TEXT NOT NULL
-    //    );
-
-    //    INSERT OR IGNORE INTO '__EFMigrationsHistory' ('MigrationId', 'ProductVersion')
-    //    VALUES ('20210611160746_Initial', '5.0.7');        
-    //");
-    //        }
             await DbContext.Database.MigrateAsync();
         }
 

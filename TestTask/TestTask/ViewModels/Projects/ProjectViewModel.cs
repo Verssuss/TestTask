@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -23,6 +24,8 @@ namespace TestTask.ViewModels.Projects
         {
             Title = "Projects";
             Projects = new ObservableCollection<Project>();
+            SelectDateStart = DateTime.Now;
+            SelectDateFinish = DateTime.Now;
         }
 
         #region Fields
@@ -70,6 +73,35 @@ namespace TestTask.ViewModels.Projects
                 await Shell.Current.GoToAsync($"{nameof(ProjectDetailPage)}?{nameof(ProjectDetailViewModel.ItemId)}={project.Id}");
             });
         }
+
+        private string _selectPriority = "All";
+        private DateTime _selectDateStart;
+        private DateTime _selectDateFinish;
+        private DateTime _minDateTo;
+
+        public string SelectPriority { get => _selectPriority; set { SetProperty(ref _selectPriority, value); LoadProjects.Execute(null); } }
+
+        public string[] PriorityItems => new[] { "All", "Low", "Middle", "High" };
+
+        public DateTime SelectDateStart 
+        { get => _selectDateStart; 
+            set 
+            {
+                SetProperty(ref _selectDateStart, value); 
+                LoadProjects.Execute(null);
+                MinDateTo = value;
+            } 
+        }
+        public DateTime SelectDateFinish 
+        { 
+            get => _selectDateFinish; 
+            set 
+            { 
+                SetProperty(ref _selectDateFinish, value); 
+                LoadProjects.Execute(null);
+            }
+        }
+        public DateTime MinDateTo { get => _minDateTo; set => SetProperty(ref _minDateTo, value); }
         public Command LoadProjects //Загрузить проекты
         {
             get => new Command(async () =>
@@ -81,12 +113,15 @@ namespace TestTask.ViewModels.Projects
                     Projects.Clear();
                     var items = await ProjectStore.GetItemsAsync(true);
 
-                    IEnumerable<Project> enumFilter;
-                    if (string.IsNullOrEmpty(SearchText)) enumFilter = items;
-                    else
-                    enumFilter = items.Where(x => string.Join("", x.Name, x.CompanyCustomer, x.CompanyExecutor, x.Employee, x.Leader).ToUpper().Contains(SearchText.ToUpper()));
+                    IEnumerable<Project> filterEnumeration;
+                    if (SelectPriority == PriorityItems[0]) filterEnumeration = items;
+                    else filterEnumeration = items.Where(x => x.Priority.ToString() == SelectPriority);
+
+                    filterEnumeration = filterEnumeration.Where(x => x.Start.Date >= SelectDateStart.Date && x.Start.Date <= SelectDateFinish.Date);
+
+                    if (!string.IsNullOrEmpty(SearchText)) filterEnumeration = filterEnumeration.Where(x =>string.Join("", x.Name, x.CompanyCustomer, x.CompanyExecutor, x.Employee, x.Leader).ToUpper().Contains(SearchText.ToUpper())); ;
                     
-                    foreach (var item in enumFilter)
+                    foreach (var item in filterEnumeration)
                     {
                         Projects.Add(item);
                     }

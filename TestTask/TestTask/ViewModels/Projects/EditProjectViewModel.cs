@@ -27,72 +27,75 @@ namespace TestTask.ViewModels.Projects
         }
 
         #region Fields
-        private int itemId;
-        private string name;
-        private string companyCustomer;
-        private string companyExecutor;
-        private Employee employee;
-        private Employee leader;
-        private ICollection<Employee> executors;
-        private DateTime start;
-        private DateTime finish;
-        private Priority priority;
+        private int _itemId;
+        private string _name;
+        private string _companyCustomer;
+        private string _companyExecutor;
+        private Employee _employee;
+        private Employee _leader;
+        private ICollection<Employee> _executors;
+        private DateTime _start;
+        private DateTime _finish;
+        private Priority _priority;
 
-        private Employee selectedEmployee;
+        private DateTime _minDateTo;
+        private Employee _selectedEmployee;
         #endregion
 
         #region Properties
         public int ItemId
         {
-            get => itemId; set { itemId = value; InitEditingProject(value); }
+            get => _itemId; set { _itemId = value; InitEditingProject(value); }
         }
 
         public string Name
         {
-            get => name; set => SetProperty(ref name, value);
+            get => _name; set => SetProperty(ref _name, value);
         }
 
         public string CompanyCustomer
         {
-            get => companyCustomer; set => SetProperty(ref companyCustomer, value);
+            get => _companyCustomer; set => SetProperty(ref _companyCustomer, value);
         }
 
         public string CompanyExecutor
         {
-            get => companyExecutor; set => SetProperty(ref companyExecutor, value);
+            get => _companyExecutor; set => SetProperty(ref _companyExecutor, value);
         }
 
         public Employee Employee
         {
-            get => employee; set => SetProperty(ref employee, value);
+            get => _employee; set => SetProperty(ref _employee, value);
         }
 
         public Employee Leader
         {
-            get => leader; set => SetProperty(ref leader, value);
+            get => _leader; set => SetProperty(ref _leader, value);
         }
 
         public ICollection<Employee> Executors
         {
-            get => executors; set => SetProperty(ref executors, value);
+            get => _executors; set => SetProperty(ref _executors, value);
         }
 
         public DateTime Start
         {
-            get => start; set => SetProperty(ref start, value);
+            get => _start; set { SetProperty(ref _start, value); MinDateTo = value; }
         }
 
         public DateTime Finish
         {
-            get => finish; set => SetProperty(ref finish, value);
+            get => _finish; set => SetProperty(ref _finish, value);
         }
 
         public Priority Priority
         {
-            get => priority; set => SetProperty(ref priority, value);
+            get => _priority; set => SetProperty(ref _priority, value);
         }
+        public DateTime MinDateTo { get => _minDateTo; set => SetProperty(ref _minDateTo, value); }
 
         private Priority _selectedPriority;
+
         public Priority SelectedPriority { get => _selectedPriority; set => SetProperty(ref _selectedPriority, value); }
 
         public ObservableCollection<Employee> EmployeeExecutors { get; private set; }
@@ -101,10 +104,10 @@ namespace TestTask.ViewModels.Projects
         public List<string> Priorities => Enum.GetNames(typeof(Priority)).Select(x => x.ToString()).ToList();
         public Employee SelectedEmployee
         {
-            get => selectedEmployee;
+            get => _selectedEmployee;
             set
             {
-                SetProperty(ref selectedEmployee, value);
+                SetProperty(ref _selectedEmployee, value);
                 AddItemToCollection(value);
             }
         }

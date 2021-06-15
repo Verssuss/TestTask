@@ -1,12 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TestTask.ViewModels.Employees"
+             xmlns:vmPr="clr-namespace:TestTask.ViewModels.Projects"
              x:Class="TestTask.Views.Employees.EmployeeDetailPage">
+    <ContentPage.BindingContext>
+        <vm:EmployeeDetailViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="REMOVE" Command="{Binding RemoveEmployee}" />
+        <ToolbarItem Text="EDIT" Command="{Binding EditEmployee}" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Name" FontSize="Medium" />
+                <Label Text="{Binding Name}" FontSize="Small" />
+
+                <Label Text="Company Customer" FontSize="Medium"/>
+                <Label Text="{Binding Surname}" FontSize="Small"/>
+
+                <Label Text="Company Executor" FontSize="Medium" />
+                <Label Text="{Binding Patronymic}" FontSize="Small"/>
+
+                <Label Text="Employee" FontSize="Medium" />
+                <Label Text="{Binding Email}" FontSize="Small"/>
+
+                <Label Text="Executor in projects" FontSize="Medium" />
+                <CollectionView ItemsSource="{Binding ExecutorProjects}" HeightRequest="100">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Orange" BackgroundColor="LightGray" HasShadow="True" CornerRadius="10">
+                                <StackLayout>
+                                    <Label Text="{Binding Name}" FontSize="Small" />
+                                    <Label Text="{Binding Leader}" FontSize="Small" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeeDetailViewModel}}, Path=ShowProject}"		
+                                CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="Leader in projects" FontSize="Medium" />
+                <CollectionView ItemsSource="{Binding LeaderProjects}" HeightRequest="100">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Orange" BackgroundColor="LightGray" HasShadow="True" CornerRadius="10">
+                                <StackLayout>
+                                    <Label Text="{Binding Name}" FontSize="Small" />
+                                    <Label Text="{Binding Leader}" FontSize="Small" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeeDetailViewModel}}, Path=ShowProject}"		
+                                CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="Employee in projects" FontSize="Medium" />
+                <CollectionView ItemsSource="{Binding EmployeeProjects}" HeightRequest="100">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Orange" BackgroundColor="LightGray" HasShadow="True" CornerRadius="10">
+                                <StackLayout>
+                                    <Label Text="{Binding Name}" FontSize="Small" />
+                                    <Label Text="{Binding Leader}" FontSize="Small" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeeDetailViewModel}}, Path=ShowProject}"		
+                                CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -33,6 +33,8 @@ namespace TestTask.ViewModels.Employees
         private string _patronumic;
         private string _email;
 
+        private bool _isValidate;
+
         private ICollection<Project> _leaderProjects;
         private ICollection<Project> _employeeProjects;
         private ICollection<Project> _executorProjects;
@@ -63,9 +65,15 @@ namespace TestTask.ViewModels.Employees
         {
             get => _patronumic; set => SetProperty(ref _patronumic, value);
         }
+
         public string Email
         {
             get => _email; set => SetProperty(ref _email, value);
+        }
+
+        public bool IsValidate
+        {
+            get => _isValidate; set => SetProperty(ref _isValidate, value);
         }
 
         public ICollection<Project> LeaderProjects
@@ -119,6 +127,7 @@ namespace TestTask.ViewModels.Employees
             Name = string.Empty;
             Surname = string.Empty;
             Patronymic = string.Empty;
+            Email = string.Empty;
             LeaderProjects = new ObservableCollection<Project>();
             EmployeeProjects = new ObservableCollection<Project>();
             ExecutorProjects = new ObservableCollection<Project>();
@@ -145,14 +154,14 @@ namespace TestTask.ViewModels.Employees
         public Command DebugCommand => new Command(() => ValidateSave());
         private bool ValidateSave()
         {
-            return new object[]
+            return new string[]
             {
                 Name,
                 Surname,
                 Patronymic,
                 Email
             }
-            .All(x => !string.IsNullOrEmpty(x.ToString()));
+            .All(x => !string.IsNullOrEmpty(x.ToString())) && IsValidate;
         }
         #endregion
 

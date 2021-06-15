@@ -8,50 +8,41 @@
         <vm:EmployeeViewModel />
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddProject}" />
+        <ToolbarItem Text="Add" Command="{Binding AddEmployee}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <!--<StackLayout>
+        <StackLayout>
             <SearchBar x:Name="SearchBar"  SearchCommand="{Binding SearchCommand}" SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}" Text="{Binding SearchText}" />
-            <RefreshView x:DataType="vm:EmployeeViewModel" Command="{Binding LoadProjects}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <RefreshView x:DataType="vm:EmployeeViewModel" Command="{Binding LoadEmployees}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                 <CollectionView x:Name="ProjectListView"
-                ItemsSource="{Binding Projects}"
+                ItemsSource="{Binding Employees}"
                 SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout Padding="10" x:DataType="model:Employee">
-                                <Label Text="{Binding Name}" 
+                            <Frame BorderColor="Orange" BackgroundColor="LightGray" HasShadow="True" CornerRadius="10">
+                                <StackLayout Padding="10" x:DataType="model:Employee">
+
+                                    <Label Text="{Binding .}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="16" />
-                                <Label Text="{Binding CompanyCustomer}" 
+                            FontSize="16"/>
+                                    <Label Text="{Binding Email}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
-                                <Label Text="{Binding CompanyExecutor}" 
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13"  />
-                                <Label Text="{Binding Start}" 
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13"  />
-                                <Label Text="{Binding Finish}" 
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13"  />
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer 
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProjectViewModel}}, Path=ShowProject}"		
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeeViewModel}}, Path=ShowEmployee}"		
                                 CommandParameter="{Binding .}">
-                                    </TapGestureRecognizer>
-                                </StackLayout.GestureRecognizers>
-                            </StackLayout>
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-        </StackLayout>-->
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

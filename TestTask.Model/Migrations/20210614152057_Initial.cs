@@ -7,8 +7,6 @@ namespace TestTask.Model.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
-
             migrationBuilder.CreateTable(
                 name: "Employee",
                 columns: table => new
@@ -99,17 +97,17 @@ namespace TestTask.Model.Migrations
             migrationBuilder.InsertData(
                 table: "Project",
                 columns: new[] { "Id", "CompanyCustomer", "CompanyExecutor", "EmployeeId", "Finish", "LeaderId", "Name", "Priority", "Start" },
-                values: new object[] { 1, "Customer", "Executor", 1, new DateTime(2021, 6, 24, 19, 10, 4, 365, DateTimeKind.Local).AddTicks(196), 1, "SuperProject", (byte)3, new DateTime(2021, 6, 14, 19, 10, 4, 364, DateTimeKind.Local).AddTicks(2865) });
+                values: new object[] { 1, "Customer", "Executor", 1, new DateTime(2021, 6, 24, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(6920), 1, "SuperProject", (byte)3, new DateTime(2021, 6, 14, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(126) });
 
             migrationBuilder.InsertData(
                 table: "Project",
                 columns: new[] { "Id", "CompanyCustomer", "CompanyExecutor", "EmployeeId", "Finish", "LeaderId", "Name", "Priority", "Start" },
-                values: new object[] { 2, "Customer2", "Executor2", 2, new DateTime(2021, 6, 27, 19, 10, 4, 365, DateTimeKind.Local).AddTicks(715), 2, "SuperProject2", (byte)1, new DateTime(2021, 6, 14, 19, 10, 4, 365, DateTimeKind.Local).AddTicks(711) });
+                values: new object[] { 2, "Customer2", "Executor2", 2, new DateTime(2021, 6, 27, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(7426), 2, "SuperProject2", (byte)1, new DateTime(2021, 6, 14, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(7423) });
 
             migrationBuilder.InsertData(
                 table: "Project",
                 columns: new[] { "Id", "CompanyCustomer", "CompanyExecutor", "EmployeeId", "Finish", "LeaderId", "Name", "Priority", "Start" },
-                values: new object[] { 3, "Customer3", "Executor3", 3, new DateTime(2021, 6, 30, 19, 10, 4, 365, DateTimeKind.Local).AddTicks(721), 3, "SuperProject3", (byte)2, new DateTime(2021, 6, 14, 19, 10, 4, 365, DateTimeKind.Local).AddTicks(720) });
+                values: new object[] { 3, "Customer3", "Executor3", 3, new DateTime(2021, 6, 30, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(7432), 3, "SuperProject3", (byte)2, new DateTime(2021, 6, 14, 22, 20, 56, 957, DateTimeKind.Local).AddTicks(7431) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeProject_ExecutorsId",
