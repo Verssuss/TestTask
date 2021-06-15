@@ -63,8 +63,8 @@ namespace TestTask.Model
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             DbContextOptionsBuilder<ApplicationDbContext> builder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            //builder.UseSqlite("Data Source=database.db");
-            builder.UseSqlite("Data Source=db.db", x => x.MigrationsAssembly("TestTask.Model"));
+            builder.UseSqlite("Data Source=database.db");
+            //builder.UseSqlite("Data Source=db.db", x => x.MigrationsAssembly("TestTask.Model"));
             return new ApplicationDbContext(builder.Options);
         }
     }
